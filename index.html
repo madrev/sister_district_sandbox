@@ -33,8 +33,15 @@
     } else if(jsonResults.count === "0") {
       districtText = $("<p></p>").text(`We couldn't find districts for that ZIP code. Please check your entry and try again.`);
     } else {
-      districtText = $("<p></p>").text(`Your ZIP code crosses multiple districts.`);
+      let resultArr = jsonResults.results;
+      districtText = $("<div></div>").html(`
+        <p>Your ZIP code crosses multiple districts:</p>
+      `);
+      let districtList = $("<ul></ul>")
+      resultArr.forEach(result => districtList.append(`<li>${result.state}-${result.district}</li>`));
+      districtText.append(districtList);
     }
+
     $("#district-results").html(districtText);
   }
 
