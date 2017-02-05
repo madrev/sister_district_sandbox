@@ -18,6 +18,9 @@
   const retrieveDistrict = zip => (
     $.ajax({
       url: `https://congress.api.sunlightfoundation.com/districts/locate?zip=${zip}`,
+      xhrFields: {
+         withCredentials: true
+      },
       success: res => appendResults(res.results)
     })
   );
