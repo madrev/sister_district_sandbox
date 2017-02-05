@@ -18,21 +18,22 @@
   const retrieveDistrict = zip => (
     $.ajax({
       method: "GET",
-      dataType: "json",
-      url: `https://congress.api.sunlightfoundation.com/districts/locate?zip=${zip}`,
-      success: res => appendResults(res.results)
+      url: `https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22https%3A%2F%2Fcongress.api.sunlightfoundation.com%2Fdistricts%2Flocate%3Fzip%3D${zip}%22&format=json&diagnostics=true&callback=`,
+      success: res => appendResults(res)
     })
   );
 
-  const appendResults = results => {
+  const appendResults = res => {
+    let jsonResults = res.query.results.json;
+    console.log(jsonResults);
     let districtText;
-    if(results.length === 1) {
-      let result = results[0];
+    if(jsonResults.count === "1") {
+      let result = jsonResults.results;
       districtText = $("<p class='district-text'></p>").text(`Your district is ${result.state}-${result.district}.`);
-    } else if(results.length > 1) {
-      districtText = $("<p></p>").text(`Your ZIP code crosses multiple districts.`);
-    } else {
+    } else if(jsonResults.count === "0") {
       districtText = $("<p></p>").text(`We couldn't find districts for that ZIP code. Please check your entry and try again.`);
+    } else {
+      districtText = $("<p></p>").text(`Your ZIP code crosses multiple districts.`);
     }
     $("#district-results").html(districtText);
   }
