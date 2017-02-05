@@ -10,6 +10,7 @@
       <input type="text" name="zip" placeholder="Your ZIP code">
       <input type="submit" value="Find your district">
     </form>
+    <div id="district-results"></div>
   </body>
 </html>
 
@@ -17,9 +18,22 @@
   const retrieveDistrict = zip => (
     $.ajax({
       url: `https://congress.api.sunlightfoundation.com/districts/locate?zip=${zip}`,
-      success: res => console.log(res)
+      success: res => appendResults(res.results)
     })
   );
+
+  const appendResults = results => {
+    let districtText;
+    if(results.length === 1) {
+      let result = results[0];
+      districtText = $("<p class='district-text'></p>").text(`Your district is ${result.state}-${result.district}.`);
+    } else if(results.length > 1) {
+      districtText = $("<p></p>").text(`Your ZIP code crosses multiple districts.`);
+    } else {
+      districtText = $("<p></p>").text(`We couldn't find districts for that ZIP code. Please check your entry and try again.`);
+    }
+    $("#district-results").html(districtText);
+  }
 
   $( () => {
     $("form").submit((e) => {
