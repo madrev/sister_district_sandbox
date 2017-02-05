@@ -15,8 +15,10 @@
 
 <script>
   const retrieveDistrict = zip => (
-    $.getJSON(`https://congress.api.sunlightfoundation.com/districts/locate?zip=${zip}`).then(
-    res => { console.log(res); })
+    $.ajax({
+      url: `https://congress.api.sunlightfoundation.com/districts/locate?zip=${zip}`,
+      success: res => console.log(res)
+    })
   );
 
   $( () => {
