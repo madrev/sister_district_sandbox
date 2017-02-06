@@ -35,12 +35,12 @@
     } else {
       let resultArr = jsonResults.results;
       districtText = $("<div></div>").html(`
-        <p>Your ZIP code crosses multiple districts:</p>
+        <p>Your ZIP code crosses ${jsonResults.count} districts:</p>
       `);
       let districtList = $("<ul></ul>")
       resultArr.forEach(result => districtList.append(`<li>${result.state}-${result.district}</li>`));
       districtText.append(districtList);
-      districtText.append("<p>If you're not sure which is yours, visit <a href='https://www.govtrack.us/congress/members'>GovTrack</a> to look up your address.</p>")
+      districtText.append("<p>If you're not sure which is yours, visit <a target='_blank' href='https://www.govtrack.us/congress/members'>GovTrack</a> to look up your address.</p>")
     }
 
     $("#district-results").html(districtText);
