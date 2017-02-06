@@ -40,6 +40,7 @@
       let districtList = $("<ul></ul>")
       resultArr.forEach(result => districtList.append(`<li>${result.state}-${result.district}</li>`));
       districtText.append(districtList);
+      districtText.append("<p>If you're not sure which is yours, visit <a href='https://www.govtrack.us/congress/members'>GovTrack</a> to look up your address.</p>")
     }
 
     $("#district-results").html(districtText);
@@ -50,6 +51,7 @@
         e.preventDefault();
         let zip = e.target.zip.value;
         retrieveDistrict(zip);
+        return false;
       });
     });
 
