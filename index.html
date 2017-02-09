@@ -4,11 +4,34 @@
     <meta charset="utf-8">
     <title>Sister District Sandbox</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <style>
+      .submit-button{
+        width: 200px;
+        padding: 13px 0;
+        border: 0;
+        font-size: 12px;
+        font-family: "proxima-nova","Helvetica Neue",Helvetica,Arial,sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+        font-style: normal;
+        color: #FFFFFF;
+        background-color: #187dc8;
+        border-radius: 3px;
+      }
+
+      .zip-field{
+        width: 200px;
+        padding: 13px 10px;
+        border-radius: 3px;
+        box-sizing: border-box;
+      }
+    </style>
   </head>
   <body>
     <form class="zip-entry">
-      <input type="text" name="zip" placeholder="Your ZIP code">
-      <input type="submit" value="Find your district">
+      <input type="text" class="zip-field" name="zip" placeholder="Your ZIP code"><br><br>
+      <input type="submit" class="submit-button" value="Find your district">
     </form>
     <div id="district-results"></div>
   </body>
