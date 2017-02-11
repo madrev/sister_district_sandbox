@@ -30,13 +30,18 @@
         });
 
 
-      map.data.loadGeoJson('https://raw.githubusercontent.com/madrev/sister_district_sandbox/master/simple.json');
+      map.data.loadGeoJson('https://raw.githubusercontent.com/madrev/sister_district_sandbox/master/simplified_tiger.json');
 
       map.data.setStyle({
         fillColor: 'green',
         strokeWeight: 0.5
       });
+      map.data.addListener('click', function(event) {
+        console.log(event.feature.f);
+      });
       }
+
+
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_Lemsbtgnzq6Nvu60PEce6A8AbpHvQQA&callback=initMap">
