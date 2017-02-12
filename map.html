@@ -95,7 +95,7 @@
       var infowindow = new google.maps.InfoWindow;
 
       map.data.addListener('click', function(event) {
-        console.log(event.feature.f);
+        console.log(event);
         infowindow.setPosition(event.latLng);
         infowindow.setContent(`${FIPS[event.feature.f["STATEFP"]]}, ${event.feature.f["CD115FP"]}`);
         infowindow.open(map);
