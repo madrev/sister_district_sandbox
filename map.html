@@ -87,9 +87,19 @@
 
       map.data.loadGeoJson('https://raw.githubusercontent.com/madrev/sister_district_sandbox/master/reps_added.json');
 
-      map.data.setStyle({
-        fillColor: 'green',
-        strokeWeight: 0.5
+      map.data.setStyle( feature => {
+        let color = 'gray';
+        if(feature.f["REP"]) {
+          if(feature.f["REP"].party === "D") {
+            color="blue";
+          } else if(feature.f["REP"].party === "R"){
+            color="red";
+          }
+        }
+        return{
+          fillColor: color,
+          strokeWeight: 0.5
+      };
       });
 
       var infowindow = new google.maps.InfoWindow;
