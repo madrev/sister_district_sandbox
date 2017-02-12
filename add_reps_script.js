@@ -15,12 +15,19 @@ const fetchAndAdd = (feature) => {
           if(result.chamber === "house") {
           feature.properties["REP"] = result;
           console.log(feature.properties);
+        } else {
+          console.log(`${lat},${lng}`);
+          console.log(result);
         }
         });
-    });
+    }).catch(err => console.log(err));
 };
 
-data.features.forEach(feature => fetchAndAdd(feature));
+const updateData = obj => {
+  return new Promise((resolve, reject) => {
+    obj.features.forEach( feat => fetchAndAdd(feat));
+    setTimeout(function(){if(obj.features[344].properties["REP"]) resolve(obj);}, 30000);
+  });
+};
 
-
-fs.writeFile('reps_added.json', JSON.stringify(data));
+updateData(data).then( res => fs.writeFile("testing.json", JSON.stringify(res)));

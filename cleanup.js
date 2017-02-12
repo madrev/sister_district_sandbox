@@ -1,4 +1,5 @@
-const http = require('http');
+
+
 const featCleanup = (feature) => {
   let str = JSON.stringify(feature.properties);
   let stateMatch = /state:(..)/.exec(str) || /"([A-Z]{2})"/.exec(str);

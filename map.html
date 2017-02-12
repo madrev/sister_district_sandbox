@@ -85,7 +85,7 @@
         });
 
 
-      map.data.loadGeoJson('https://raw.githubusercontent.com/madrev/sister_district_sandbox/master/simplified_tiger.json');
+      map.data.loadGeoJson('https://raw.githubusercontent.com/madrev/sister_district_sandbox/master/reps_added.json');
 
       map.data.setStyle({
         fillColor: 'green',
@@ -97,7 +97,7 @@
       map.data.addListener('click', function(event) {
         console.log(event);
         infowindow.setPosition(event.latLng);
-        infowindow.setContent(`${FIPS[event.feature.f["STATEFP"]]}, ${event.feature.f["CD115FP"]}`);
+        infowindow.setContent(`${event.feature.f["REP"].state_name}, ${event.feature.f["CD115FP"]}`);
         infowindow.open(map);
       });
       }
