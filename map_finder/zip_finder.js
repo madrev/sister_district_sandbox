@@ -14,13 +14,14 @@ const retrieveDistrict = zip => (
 
     if(jsonResults.count === "1") {
       let result = jsonResults.results;
-      districtText = $("<p class='district-text'></p>").text(`Your district is ${result.state}-${result.district}.`);
+      districtText = $("<p class='district-text'></p>").text(
+        `Your district is ${result.state}-${(result.district === '0' ? 'at-large' : result.district)}.`);
     } else if(jsonResults.count === "0") {
       districtText = $("<p></p>").text(`We couldn't find districts for that ZIP code. Please check your entry and try again.`);
     } else {
       let resultArr = jsonResults.results;
       districtText = $("<div></div>").html(`
-        <p>Your ZIP code crosses multiple districts:</p>
+        <p>Your ZIP code crosses ${jsonResults.count} districts:</p>
       `);
       let districtList = $("<ul></ul>");
       resultArr.forEach(result => districtList.append(`<li>${result.state}-${result.district}</li>`));

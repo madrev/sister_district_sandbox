@@ -157,12 +157,12 @@ var appendResults = function appendResults(res) {
 
   if (jsonResults.count === "1") {
     var result = jsonResults.results;
-    districtText = $("<p class='district-text'></p>").text("Your district is " + result.state + "-" + result.district + ".");
+    districtText = $("<p class='district-text'></p>").text("Your district is " + result.state + "-" + (result.district === '0' ? 'at-large' : result.district) + ".");
   } else if (jsonResults.count === "0") {
     districtText = $("<p></p>").text("We couldn't find districts for that ZIP code. Please check your entry and try again.");
   } else {
     var resultArr = jsonResults.results;
-    districtText = $("<div></div>").html("\n        <p>Your ZIP code crosses multiple districts:</p>\n      ");
+    districtText = $("<div></div>").html("\n        <p>Your ZIP code crosses " + jsonResults.count + " districts:</p>\n      ");
     var districtList = $("<ul></ul>");
     resultArr.forEach(function (result) {
       return districtList.append("<li>" + result.state + "-" + result.district + "</li>");
@@ -201,6 +201,7 @@ $(function () {
     var zip = e.target.zip.value;
     (0, _map_setup.geocode)(String(zip));
     (0, _zip_finder2.default)(zip);
+    return false;
   });
 });
 
