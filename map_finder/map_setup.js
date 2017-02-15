@@ -1,11 +1,10 @@
 
 
-  function initMap() {
+  export const initMap = () => {
     const map = new google.maps.Map(document.getElementById('map'), {
       zoom: 4,
       center: {lat: 37.0902, lng: -95.71}
     });
-    const geocoder = new google.maps.Geocoder();
 
 
   map.data.loadGeoJson('https://raw.githubusercontent.com/madrev/sister_district_sandbox/master/reps_added.json');
@@ -26,14 +25,12 @@
   });
 
   const infowindow = new google.maps.InfoWindow;
-
   map.data.addListener('click', function(event) {
       infowindow.setPosition(event.latLng);
       infowindow.setContent(`${event.feature.f["STATE"]}, ${event.feature.f["CD115FP"]}`);
       infowindow.open(map);
     });
-  }
 
-  window.initMap = initMap;
 
-  export default initMap;
+  };
+    window.initMap = initMap;

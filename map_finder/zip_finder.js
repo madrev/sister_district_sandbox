@@ -1,4 +1,4 @@
-
+import { geocoder } from "./map_setup.js";
 
 const retrieveDistrict = zip => (
     $.ajax({
@@ -7,10 +7,6 @@ const retrieveDistrict = zip => (
       success: res => appendResults(res)
     })
   );
-
-  // const geocode = zip => {
-  //   geocoder.geocode({'address': zip}, res => console.log(res));
-  // };
 
   const appendResults = res => {
     let jsonResults = res.query.results.json;
@@ -34,4 +30,4 @@ const retrieveDistrict = zip => (
     $("#district-results").html(districtText);
   };
 
-  export default retrieveDistrict;
+export default retrieveDistrict;

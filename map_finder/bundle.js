@@ -76,14 +76,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-
-function initMap() {
+var initMap = exports.initMap = function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 4,
     center: { lat: 37.0902, lng: -95.71 }
   });
-  var geocoder = new google.maps.Geocoder();
 
   map.data.loadGeoJson('https://raw.githubusercontent.com/madrev/sister_district_sandbox/master/reps_added.json');
 
@@ -103,17 +100,13 @@ function initMap() {
   });
 
   var infowindow = new google.maps.InfoWindow();
-
   map.data.addListener('click', function (event) {
     infowindow.setPosition(event.latLng);
     infowindow.setContent(event.feature.f["STATE"] + ', ' + event.feature.f["CD115FP"]);
     infowindow.open(map);
   });
-}
-
+};
 window.initMap = initMap;
-
-exports.default = initMap;
 
 /***/ }),
 /* 1 */
@@ -126,6 +119,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _map_setup = __webpack_require__(0);
 
 var retrieveDistrict = function retrieveDistrict(zip) {
   return $.ajax({
@@ -136,10 +130,6 @@ var retrieveDistrict = function retrieveDistrict(zip) {
     }
   });
 };
-
-// const geocode = zip => {
-//   geocoder.geocode({'address': zip}, res => console.log(res));
-// };
 
 var appendResults = function appendResults(res) {
   var jsonResults = res.query.results.json;
@@ -174,20 +164,28 @@ exports.default = retrieveDistrict;
 
 var _map_setup = __webpack_require__(0);
 
-var _map_setup2 = _interopRequireDefault(_map_setup);
-
 var _zip_finder = __webpack_require__(1);
 
 var _zip_finder2 = _interopRequireDefault(_zip_finder);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+window.initMap = _map_setup.initMap;
+
+var geocoder = new google.maps.Geocoder();
+
+var geocode = function geocode(zip) {
+  geocoder.geocode({ 'address': zip }, function (res) {
+    return console.log(res[0].geometry.location.lat());
+  });
+};
+
 $(function () {
-  var initMap;
+  (0, _map_setup.initMap)();
   $("form").submit(function (e) {
     e.preventDefault();
     var zip = e.target.zip.value;
-    // geocode(zip);
+    geocode(String(zip));
     (0, _zip_finder2.default)(zip);
   });
 });
