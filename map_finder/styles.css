@@ -1,0 +1,36 @@
+#map {
+  height: 50%;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.zip-box {
+  padding:20px;
+  margin: 0 auto;
+}
+
+.submit-button{
+  width: 200px;
+  padding: 13px 0;
+  border: 0;
+  font-size: 12px;
+  font-family: "proxima-nova","Helvetica Neue",Helvetica,Arial,sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  font-style: normal;
+  color: #FFFFFF;
+  background-color: #187dc8;
+  border-radius: 3px;
+}
+
+.zip-field{
+  width: 200px;
+  padding: 13px 10px;
+  border-radius: 3px;
+  box-sizing: border-box;
+}

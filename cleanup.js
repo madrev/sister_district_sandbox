@@ -1,7 +1,6 @@
+
+
 const featCleanup = (feature) => {
-
-
-
   let str = JSON.stringify(feature.properties);
   let stateMatch = /state:(..)/.exec(str) || /"([A-Z]{2})"/.exec(str);
   let distMatch = /cd:(\d\d?)/.exec(str) || /(\d\d?)(th|nd|st|rd)/.exec(str);
@@ -37,6 +36,12 @@ const objCleanup = obj => {
 
 };
 
+
+const addRep = feature => {
+
+
+
+}
 
 const FIPS = { '10': 'Delaware',
   '11': 'District of Columbia',
