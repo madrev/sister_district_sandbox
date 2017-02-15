@@ -21,13 +21,15 @@ map.data.setStyle( feature => {
   return{
     fillColor: color,
     strokeWeight: 0.35
-};
+  };
 });
 
 const infowindow = new google.maps.InfoWindow;
     map.data.addListener('click', function(event) {
+    let districtNum = event.feature.f["CD115FP"];
+    let districtType = (districtNum == "00" ? "at large" : `District ${districtNum}`);
     infowindow.setPosition(event.latLng);
-    infowindow.setContent(`${event.feature.f["STATE"]}, ${event.feature.f["CD115FP"]}`);
+    infowindow.setContent(`${event.feature.f["STATE"]} ${districtType}`);
     infowindow.open(map);
   });
 };

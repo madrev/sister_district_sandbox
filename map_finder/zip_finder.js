@@ -25,6 +25,8 @@ const retrieveDistrict = zip => (
       let districtList = $("<ul></ul>");
       resultArr.forEach(result => districtList.append(`<li>${result.state}-${result.district}</li>`));
       districtText.append(districtList);
+      let mapReferenceText = $("<p></p>").text(`Click on your neighborhood on the map above to reveal your district.`);
+      districtText.append(mapReferenceText);
     }
 
     $("#district-results").html(districtText);

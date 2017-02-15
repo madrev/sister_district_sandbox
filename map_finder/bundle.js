@@ -103,8 +103,10 @@ var initMap = exports.initMap = function initMap() {
 
   var infowindow = new google.maps.InfoWindow();
   map.data.addListener('click', function (event) {
+    var districtNum = event.feature.f["CD115FP"];
+    var districtType = districtNum == "00" ? "at large" : 'District ' + districtNum;
     infowindow.setPosition(event.latLng);
-    infowindow.setContent(event.feature.f["STATE"] + ', ' + event.feature.f["CD115FP"]);
+    infowindow.setContent(event.feature.f["STATE"] + ' ' + districtType);
     infowindow.open(map);
   });
 };
@@ -166,6 +168,8 @@ var appendResults = function appendResults(res) {
       return districtList.append("<li>" + result.state + "-" + result.district + "</li>");
     });
     districtText.append(districtList);
+    var mapReferenceText = $("<p></p>").text("Click on your neighborhood on the map above to reveal your district.");
+    districtText.append(mapReferenceText);
   }
 
   $("#district-results").html(districtText);
