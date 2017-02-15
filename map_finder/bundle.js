@@ -76,8 +76,10 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var map = void 0;
+
 var initMap = exports.initMap = function initMap() {
-  var map = new google.maps.Map(document.getElementById('map'), {
+  map = new google.maps.Map(document.getElementById('map'), {
     zoom: 4,
     center: { lat: 37.0902, lng: -95.71 }
   });
@@ -106,7 +108,23 @@ var initMap = exports.initMap = function initMap() {
     infowindow.open(map);
   });
 };
-window.initMap = initMap;
+
+var zoomTo = function zoomTo(lat, lng) {
+  var loc = new google.maps.LatLng(lat, lng);
+  map.setCenter(loc);
+  map.setZoom(13);
+};
+window.zoomTo = zoomTo;
+
+var geocoder = new google.maps.Geocoder();
+
+var geocode = exports.geocode = function geocode(zip) {
+  geocoder.geocode({ 'address': zip }, function (res) {
+    var lat = res[0].geometry.location.lat();
+    var lng = res[0].geometry.location.lng();
+    zoomTo(lat, lng);
+  });
+};
 
 /***/ }),
 /* 1 */
@@ -172,20 +190,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 window.initMap = _map_setup.initMap;
 
-var geocoder = new google.maps.Geocoder();
-
-var geocode = function geocode(zip) {
-  geocoder.geocode({ 'address': zip }, function (res) {
-    return console.log(res[0].geometry.location.lat());
-  });
-};
-
 $(function () {
   (0, _map_setup.initMap)();
   $("form").submit(function (e) {
     e.preventDefault();
     var zip = e.target.zip.value;
-    geocode(String(zip));
+    (0, _map_setup.geocode)(String(zip));
     (0, _zip_finder2.default)(zip);
   });
 });

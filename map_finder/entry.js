@@ -1,13 +1,8 @@
-import { initMap } from "./map_setup.js";
+import { initMap, geocode } from "./map_setup.js";
 import retrieveDistrict from "./zip_finder.js";
 
 window.initMap = initMap;
 
-const geocoder = new google.maps.Geocoder();
-
-const geocode = zip => {
-  geocoder.geocode({'address': zip}, res => console.log(res[0].geometry.location.lat()));
-};
 
 
 $( () => {
