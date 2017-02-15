@@ -28,9 +28,12 @@
   const infowindow = new google.maps.InfoWindow;
 
   map.data.addListener('click', function(event) {
-      console.log(event);
       infowindow.setPosition(event.latLng);
       infowindow.setContent(`${event.feature.f["STATE"]}, ${event.feature.f["CD115FP"]}`);
       infowindow.open(map);
     });
   }
+
+  window.initMap = initMap;
+
+  export default initMap;

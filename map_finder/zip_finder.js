@@ -1,5 +1,6 @@
 
-  const retrieveDistrict = zip => (
+
+const retrieveDistrict = zip => (
     $.ajax({
       method: "GET",
       url: `https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22https%3A%2F%2Fcongress.api.sunlightfoundation.com%2Fdistricts%2Flocate%3Fzip%3D${zip}%22&format=json&diagnostics=true&callback=`,
@@ -33,14 +34,4 @@
     $("#district-results").html(districtText);
   };
 
-
-
-
-  $( () => {
-    $("form").submit((e) => {
-        e.preventDefault();
-        let zip = e.target.zip.value;
-        // geocode(zip);
-        retrieveDistrict(zip);
-      });
-    });
+  export default retrieveDistrict;
